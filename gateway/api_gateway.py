@@ -6,15 +6,15 @@ app = Flask(__name__)
 CORS(app)  # Habilita CORS para todas as rotas
 
 # Rota do API Gateway para conversão de Criptos
-@app.route('/convert-currency', methods=['POST'])
-def convert_bitcoin_ethereum():
+@app.route('/convert-crypto', methods=['POST'])
+def convert_crypto():
     data = request.json
     amount = data.get('amount')
     from_currency = data.get('from_currency')
     to_currency = data.get('to_currency')
 
-    # Chama o microserviço de conversão
-    conversion_service_url = "http://localhost:5001/convert"
+    # Chama o microserviço de conversão de criptomoedas
+    conversion_service_url = "http://localhost:5001/convert-crypto-currency"  # Rota para criptos
     response = requests.post(conversion_service_url, json={
         'amount': amount,
         'from_currency': from_currency,
@@ -22,6 +22,25 @@ def convert_bitcoin_ethereum():
     })
     
     return jsonify(response.json()), response.status_code
+
+# Rota do API Gateway para conversão de Moedas Reais
+@app.route('/convert-real', methods=['POST'])
+def convert_real_currency():
+    data = request.json
+    print(request.json)
+    amount = data.get('amount')
+    from_currency = data.get('from_currency')
+    to_currency = data.get('to_currency')
+
+    # Chama o microserviço de conversão de moedas reais
+    conversion_service_url = "http://localhost:5002/convert-real-currency"  # Nova rota para moedas reais
+    response = requests.post(conversion_service_url, json={
+        'amount': amount,
+        'from_currency': from_currency,
+        'to_currency': to_currency
+    })
+    return jsonify(response.json()), response.status_code
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

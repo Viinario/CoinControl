@@ -19,7 +19,7 @@ def get_currency_abbreviation(currency_name):
     return crypto_map.get(currency_name.lower(), currency_name.lower())
 
 # Rota do microserviço para conversão de criptomoedas
-@app.route('/convert', methods=['POST'])
+@app.route('/convert-crypto-currency', methods=['POST'])
 def convert():
     data = request.json
     amount = float(data.get('amount'))

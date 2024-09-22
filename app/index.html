@@ -3,46 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conversor de Criptomoedas</title>
+    <title>Conversor de Moedas</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="container">
-        <h2>Conversor de Criptomoedas</h2>
+        <h2>Conversor de Moedas</h2>
 
-        <!-- Selecionar moeda de origem com o título "Cripto Atual" -->
-        <div class="form-group">
-            <label for="fromCurrency">Cripto Atual</label>
-            <select id="fromCurrency">
-                <option value="bitcoin">Bitcoin (BTC)</option>
-                <option value="ethereum">Ethereum (ETH)</option>
-            </select>
+        <!-- Abas para selecionar Cripto ou Moeda Real -->
+        <div class="tabs">
+            <button class="tablinks" onclick="openTab(event, 'Cripto')" id="defaultOpen">Cripto</button>
+            <button class="tablinks" onclick="openTab(event, 'MoedaReal')">Moeda Real</button>
         </div>
 
-        <!-- Selecionar moeda de destino com o título "Cripto Desejado" -->
-        <div class="form-group">
-            <label for="toCurrency">Cripto Desejado</label>
-            <select id="toCurrency">
-                <option value="ethereum">Ethereum (ETH)</option>
-                <option value="bitcoin">Bitcoin (BTC)</option>
-            </select>
+        <!-- Conteúdo da aba Cripto -->
+        <div id="Cripto" class="tabcontent">
+            <h3>Conversão de Criptomoedas</h3>
+            <div class="form-group">
+                <label for="fromCurrency">Cripto Atual</label>
+                <select id="fromCurrency">
+                    <option value="bitcoin">Bitcoin (BTC)</option>
+                    <option value="ethereum">Ethereum (ETH)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="toCurrency">Cripto Desejado</label>
+                <select id="toCurrency">
+                    <option value="ethereum">Ethereum (ETH)</option>
+                    <option value="bitcoin">Bitcoin (BTC)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="amount">Valor a converter</label>
+                <input type="number" id="amount" placeholder="Valor a converter" step="0.0001">
+            </div>
+
+            <button onclick="convertCripto()">Converter</button>
+
+            <h3 id="resultCripto"></h3>
         </div>
 
-        <!-- Campo para o valor -->
-        <div class="form-group">
-            <label for="amount">Valor a converter</label>
-            <input type="number" id="amount" placeholder="Valor a converter" step="0.0001">
+        <!-- Conteúdo da aba Moeda Real -->
+        <div id="MoedaReal" class="tabcontent">
+            <h3>Conversão de Moedas Reais</h3>
+            <div class="form-group">
+                <label for="fromCurrencyReal">Moeda Atual</label>
+                <select id="fromCurrencyReal">
+                    <option value="usd">Dólar Americano (USD)</option>
+                    <option value="eur">Euro (EUR)</option>
+                    <option value="brl">Real Brasileiro (BRL)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="toCurrencyReal">Moeda Desejada</label>
+                <select id="toCurrencyReal">
+                    <option value="usd">Dólar Americano (USD)</option>
+                    <option value="eur">Euro (EUR)</option>
+                    <option value="brl">Real Brasileiro (BRL)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="amountReal">Valor a converter</label>
+                <input type="number" id="amountReal" placeholder="Valor a converter" step="0.01">
+            </div>
+
+            <button onclick="convertReal()">Converter</button>
+
+            <h3 id="resultReal"></h3>
         </div>
-
-        <!-- Botão de conversão -->
-        <button onclick="convert()">Converter</button>
-
-        <!-- Área de resultado -->
-        <h3 id="result"></h3>
     </div>
-
     <script src="script.js"></script>
-
 </body>
 </html>
