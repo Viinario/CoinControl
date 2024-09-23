@@ -7,6 +7,102 @@ body {
     height: 100vh;
     margin: 0;
     color: #333;
+    padding-top: 80px; /* Adiciona um espaçamento para que a seta não fique em cima do conversor */
+}
+
+nav {
+    position: absolute;
+    top: 20px; /* Posição fixa no topo da página */
+    left: 20px; /* Distância da borda esquerda */
+	width: 300px;
+	background: white;
+	color: rgba(0, 0, 0, 0.87);
+	-webkit-clip-path: circle(24px at 30px 24px);
+	clip-path: circle(24px at 32px 24px);
+	-webkit-transition: -webkit-clip-path 0.5625s, clip-path 0.375s;
+	transition: -webkit-clip-path 0.5625s, clip-path 0.375s;
+  }
+  
+  nav:hover {
+	-webkit-transition-timing-function: ease-out;
+	transition-timing-function: ease-out;
+	-webkit-transition-duration: 0.75s;
+	transition-duration: 0.75s;
+	-webkit-clip-path: circle(390px at 225px 24px);
+	clip-path: circle(390px at 150px 24px);
+  }
+  
+  a {
+	display: block;
+	line-height: 50px;
+	padding: 0 20px;
+	color: inherit;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+  }
+  
+  a:hover { background: #ffe082; }
+  
+  a:active { background: #ffca28; }
+  
+  .navicon {
+	padding: 23px 20px;
+	cursor: pointer;
+	-webkit-transform-origin: 32px 24px;
+	-ms-transform-origin: 32px 24px;
+	transform-origin: 32px 24px;
+  }
+  
+  .navicon div {
+	position: relative;
+	width: 20px;
+	height: 2px;
+	background: rgba(0, 0, 0, 0.87);
+  }
+  
+  .navicon div:before,
+  .navicon div:after {
+	display: block;
+	content: "";
+	width: 20px;
+	height: 2px;
+	background: rgba(0, 0, 0, 0.87);
+	position: absolute;
+  }
+  
+  .navicon div:before { top: -7px; }
+  
+  .navicon div:after { top: 7px; }
+
+  .title {
+	font-size: 4rem; /* Ajuste o tamanho conforme necessário */
+	text-align: center;
+	font-weight: bold;
+	margin-bottom: 20px; /* Espaçamento entre o título e a imagem */
+	margin-top: -15px; /* Ajuste o valor negativo para mover para cima */
+	color: #333; /* Ajuste a cor conforme necessário */
+  }
+  
+
+.back-to-menu {
+    display: inline-block;
+    font-size: 1.5rem;
+    color: #333; /* Ajuste a cor conforme necessário */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.back-to-menu:hover {
+    color: #007BFF; /* Cor ao passar o mouse */
+}
+
+.back-to-menu::before {
+    content: "← "; /* Seta antes do texto */
+    font-size: 1.5rem;
+    vertical-align: middle;
 }
 
 .container {
@@ -264,3 +360,61 @@ h4 {
     margin-bottom: 10px;
     color: #000;
 }
+
+.back-to-menu {
+    display: inline-block;
+    font-size: 1.5rem;
+    color: #333; /* Ajuste a cor conforme necessário */
+    text-decoration: none;
+    margin-top: 20px;
+    transition: color 0.3s ease;
+  }
+  
+  .back-to-menu:hover {
+    color: #007BFF; /* Cor ao passar o mouse */
+  }
+  
+  .back-to-menu::before {
+    content: "← "; /* Seta antes do texto */
+    font-size: 1.5rem;
+    vertical-align: middle;
+  }
+
+  .conversion-results h4 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+.conversion-results button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 50%; /* Deixa o botão circular */
+    font-size: 16px;
+    line-height: 1;
+    width: 30px; /* Largura ajustada para ser menor */
+    height: 30px; /* Altura ajustada para ser menor */
+    text-align: center;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.conversion-results button:hover {
+    background-color: #0056b3;
+}
+
+#Portfolio {
+    max-height: 100vh;  /* Limita a altura ao tamanho da tela (viewport) */
+    overflow-y: auto;   /* Adiciona uma barra de rolagem vertical apenas se necessário */
+    padding: 10px;
+    border: 1px solid #ccc;  /* Borda ao redor da div */
+    background-color: #f9f9f9; /* Cor de fundo clara */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+

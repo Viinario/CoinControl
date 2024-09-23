@@ -127,7 +127,6 @@ async function openConversionTab(cryptoType, amount, index) {
         'ethereum': 'eth',
         'litecoin': 'ltc',
         'ripple': 'xrp'
-        // Adicione mais mapeamentos conforme necessário
     };
 
     // Moedas disponíveis (nomes completos)
@@ -175,13 +174,22 @@ async function openConversionTab(cryptoType, amount, index) {
 
         // Localiza o elemento onde os resultados serão exibidos
         const resultDiv = document.getElementById(`conversion-results-${index}`);
-        resultDiv.innerHTML = `<h4>Conversão de ${amount} ${from_currency_name}:</h4>`;  // Título para os resultados
+        resultDiv.innerHTML = `
+            <h4>
+                Conversão de ${amount} ${from_currency_name} 
+                <button onclick="toggleResults(${index})">-</button>
+            </h4>
+            <div class="results-content">
+            </div>
+        `;
+
+        const resultsContentDiv = resultDiv.querySelector('.results-content');
 
         // Itera pelos resultados e escreve cada conversão
         results.forEach(result => {
             const resultLine = document.createElement('p');
-            resultLine.textContent = `${result.converted_amount} ${ crypto_map[result.toCurrencyName].toUpperCase()}`;
-            resultDiv.appendChild(resultLine);
+            resultLine.textContent = `${result.converted_amount} ${crypto_map[result.toCurrencyName].toUpperCase()}`;
+            resultsContentDiv.appendChild(resultLine);
         });
 
     } catch (error) {
@@ -190,6 +198,21 @@ async function openConversionTab(cryptoType, amount, index) {
         alert('Erro ao realizar a conversão. Tente novamente.');
     }
 }
+
+// Função para minimizar e expandir os resultados
+function toggleResults(index) {
+    const resultsDiv = document.querySelector(`#conversion-results-${index} .results-content`);
+    const button = document.querySelector(`#conversion-results-${index} button`);
+
+    if (resultsDiv.style.display === "none") {
+        resultsDiv.style.display = "block";  // Mostra os resultados
+        button.textContent = "-";  // Altera o botão para indicar que é possível minimizar
+    } else {
+        resultsDiv.style.display = "none";  // Esconde os resultados
+        button.textContent = "+";  // Altera o botão para indicar que é possível expandir
+    }
+}
+
 
 function updatePortfolioDisplay() {
     const portfolioList = document.getElementById("portfolio-list");
@@ -209,6 +232,8 @@ function updatePortfolioDisplay() {
         portfolioList.appendChild(item);
     });
 }
+
+
 
 
 

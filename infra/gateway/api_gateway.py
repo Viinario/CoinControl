@@ -27,7 +27,6 @@ def convert_crypto():
 @app.route('/convert-real', methods=['POST'])
 def convert_real_currency():
     data = request.json
-    print(request.json)
     amount = data.get('amount')
     from_currency = data.get('from_currency')
     to_currency = data.get('to_currency')
