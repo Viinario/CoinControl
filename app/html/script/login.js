@@ -26,7 +26,7 @@ async function handleLogin(event) {
             const data = await response.json();
             alert('Login realizado com sucesso!');
             // Redireciona para a página index.html
-            window.location.href = 'index.html'; // Coloque o caminho correto para a sua página
+            window.location.href = 'menu.html'; // Coloque o caminho correto para a sua página
         } else {
             alert('Falha no login, verifique suas credenciais.');
         }
