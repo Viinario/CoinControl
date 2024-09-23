@@ -41,6 +41,21 @@ def convert_real_currency():
     })
     return jsonify(response.json()), response.status_code
 
+# Rota do API Gateway para login
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.json
+    email = data.get('email')
+    password = data.get('password')
+
+    # Chama o microserviço de login
+    login_service_url = "http://localhost:5003/login"  # Rota para o microserviço de login
+    response = requests.post(login_service_url, json={
+        'email': email,
+        'password': password
+    })
+
+    return jsonify(response.json()), response.status_code
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
