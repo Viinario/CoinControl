@@ -5,16 +5,15 @@ import bcrypt
 
 app = Flask(__name__)
 
-# Função para carregar o banco de dados de clientes a partir de um arquivo JSON
-def load_users_db():
-    # Define o caminho completo para o arquivo clients.json
-    file_path = os.path.join(os.path.dirname(__file__), 'dataBase/clients.json')
+# Caminho para o arquivo de banco de dados
+database_path = 'dataBase/clients.json'
 
-    # Abre o arquivo e carrega os dados
-    with open(file_path, 'r') as f:
-        users_db = json.load(f)
-
-    return users_db
+# Função para carregar o banco de dados (arquivo JSON)
+def load_database():
+    if os.path.exists(database_path):
+        with open(database_path, 'r') as file:
+            return json.load(file)
+    return []
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -26,15 +25,18 @@ def login():
     password = data.get('password')
 
     # Carrega o banco de dados de usuários do arquivo JSON
-    users_db = load_users_db()
+    users_db = load_database()
 
     # Verifica se o email existe no banco de dados
-    if email in users_db:
-        # Hash armazenado no arquivo JSON
-        stored_hash = users_db[email].encode('utf-8')
-        print(bcrypt.checkpw(password.encode('utf-8'), stored_hash))
+    user = next((user for user in users_db if user['email'] == email), None)
 
-        # Gera o hash da senha fornecida pelo usuário e compara com o hash armazenado
+    if user:
+        # Hash armazenado no arquivo JSON
+        stored_hash = user['password'].encode('utf-8')
+        print(password.encode('utf-8'))
+        print(stored_hash)
+
+        # Compara o hash da senha fornecida pelo usuário com o hash armazenado
         if bcrypt.checkpw(password.encode('utf-8'), stored_hash):
             return jsonify({"message": "Login realizado com sucesso!", "status": "success"}), 200
         else:

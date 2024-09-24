@@ -56,5 +56,24 @@ def login():
 
     return jsonify(response.json()), response.status_code
 
+# Rota do API Gateway para registro de usuários
+@app.route('/register', methods=['POST'])
+def register():
+    data = request.json
+    name = data.get('name')
+    email = data.get('email')
+    password = data.get('password')
+
+    # Chama o microserviço de registro
+    register_service_url = "http://localhost:5004/register-signup"  # URL do microserviço de registro
+    response = requests.post(register_service_url, json={
+        'name': name,
+        'email': email,
+        'password': password
+    })
+
+    return jsonify(response.json()), response.status_code
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
+
